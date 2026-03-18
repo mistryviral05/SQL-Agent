@@ -114,7 +114,7 @@ function PromptInput({
         </div>
 
         {/* Input card */}
-        <div className="bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden focus-within:border-zinc-500 transition-colors">
+        <div className="bg-zinc-900 border-2 border-zinc-700 rounded-2xl overflow-hidden focus-within:border-[#bef264] transition-colors">
           <textarea
             ref={textareaRef}
             className="w-full bg-transparent text-sm text-white placeholder-zinc-500 resize-none outline-none px-5 pt-4 pb-2 min-h-[56px] max-h-[160px] leading-6"
@@ -132,7 +132,7 @@ function PromptInput({
             <button
               onClick={onSubmit}
               disabled={!input.trim() || isLoading}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#bef264] text-black text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#d4fb7a] transition-colors"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#bef264] text-black text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#d4fb7a] transition-colors cursor-pointer"
             >
               Send
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
@@ -148,7 +148,7 @@ function PromptInput({
             <button
               key={s}
               onClick={() => setInput(s)}
-              className="text-xs text-zinc-500 border border-zinc-800 hover:border-zinc-600 hover:text-zinc-300 rounded-lg px-3 py-1.5 transition-colors bg-zinc-900"
+              className="text-xs text-zinc-500 border-2 border-zinc-800 hover:border-zinc-600 hover:text-zinc-300 rounded-lg px-3 py-1.5 transition-colors bg-zinc-900 cursor-pointer"
             >
               {s}
             </button>
@@ -162,7 +162,7 @@ function PromptInput({
   return (
     <div className="sticky bottom-0 bg-black border-t border-zinc-800 px-4 py-3">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden focus-within:border-zinc-500 transition-colors">
+        <div className="bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden focus-within:border-[#bef264] transition-colors">
           <textarea
             ref={textareaRef}
             className="w-full bg-transparent text-sm text-white placeholder-zinc-500 resize-none outline-none px-5 pt-3.5 pb-2 min-h-[48px] max-h-[160px] leading-6"
@@ -230,8 +230,30 @@ export default function Home() {
 
       {/* Body */}
       {!hasMessages ? (
-        /* ── Centered landing ── */
-        <div className="flex-1 flex flex-col items-center justify-center py-12">
+        /* ── Centered landing with gradient ── */
+        <div className="relative flex-1 flex flex-col items-center justify-center py-12 overflow-hidden">
+          {/* Gradient blob — top */}
+          <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+            <div
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+              className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+
+          {/* Gradient blob — bottom mirror */}
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+            <div
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[210deg] bg-gradient-to-tr from-[#9089fc] to-[#ff80b5] opacity-10 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+
           <PromptInput
             input={input}
             setInput={setInput}
